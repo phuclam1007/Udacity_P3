@@ -5,22 +5,34 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
+  build:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+      - image: udagram-api-feed
+      - image: udagram-api-user
+      - image: udagram-frontend
+      - image: udagram-reverseproxy
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.22
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
-workflows:
-  say-hello-workflow:
-    jobs:
-      - say-hello
+          name: Install dependencies
+          command: echo "No need to install anything. \n Just build and push the Docker image."
+      - run:
+          name: Build and push Docker image
+          command: |
+            echo "Inside the Build and push Docker image step"
+            docker --version # print the version for logging
+            docker build -t udagram-api-feed ./udagram-api-feed  
+            docker tag udagram-api-feed udagram-api-feed:1.0.0
+            docker build -t udagram-api-user ./udagram-api-user  
+            docker tag udagram-api-user udagram-api-user:1.0.0
+            docker build -t udagram-frontend ./udagram-frontend
+            docker tag udagram-frontend udagram-frontend:1.0.0
+            docker build -t udagram-reverseproxy ./udagram-reverseproxy
+            docker tag udagram-reverseproxy udagram-reverseproxy:1.0.0
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            docker push udagram-api-feed:1.0.0
+            docker push udagram-api-user:1.0.0
+            docker push udagram-frontend:1.0.0
+            docker push udagram-reverseproxy:1.0.0
