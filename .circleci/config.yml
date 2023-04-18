@@ -26,8 +26,8 @@ jobs:
             docker build -t udagram-frontend ./udagram-frontend
             docker build -t udagram-reverseproxy ./udagram-reverseproxy
       - run:
-        name: Tag Docker image
-        command: |
+          name: Tag Docker image
+          command: |
             echo "Inside the Tag Docker image step"
             docker --version # print the version for logging
             docker tag udagram-api-feed udagram-api-feed:1.0.0
@@ -35,8 +35,8 @@ jobs:
             docker tag udagram-frontend udagram-frontend:1.0.0
             docker tag udagram-reverseproxy udagram-reverseproxy:1.0.0
       - run:
-        name: Push Docker image
-        command: |
+          name: Push Docker image
+          command: |
             echo "Inside the Tag Docker image step"
             docker --version # print the version for logging
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
