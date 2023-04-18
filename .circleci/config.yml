@@ -22,29 +22,29 @@ jobs:
           command: |
             echo "Inside the Build Docker image step"
             docker --version # print the version for logging
-            docker build -t udagram-api-feed ./udagram-api-feed  
-            docker build -t udagram-api-user ./udagram-api-user  
-            docker build -t udagram-frontend ./udagram-frontend
-            docker build -t udagram-reverseproxy ./udagram-reverseproxy
+            docker build -t phuclmh/udagram-api-feed .
+            docker build -t phuclmh/udagram-api-user .
+            docker build -t phuclmh/udagram-frontend .
+            docker build -t phuclmh/udagram-reverseproxy .
       - run:
           name: "Tag Docker image"
           command: |
             echo "Inside the Tag Docker image step"
             docker --version # print the version for logging
-            docker tag udagram-api-feed udagram-api-feed:1.0.0
-            docker tag udagram-api-user udagram-api-user:1.0.0
-            docker tag udagram-frontend udagram-frontend:1.0.0
-            docker tag udagram-reverseproxy udagram-reverseproxy:1.0.0
+            docker tag phuclmh/udagram-api-feed phuclmh/udagram-api-feed:1.0.0
+            docker tag phuclmh/udagram-api-user phuclmh/udagram-api-user:1.0.0
+            docker tag phuclmh/udagram-frontend phuclmh/udagram-frontend:1.0.0
+            docker tag phuclmh/udagram-reverseproxy phuclmh/udagram-reverseproxy:1.0.0
       - run:
           name: "Push Docker image"
           command: |
             echo "Inside the Tag Docker image step"
             docker --version # print the version for logging
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            docker push udagram-api-feed:1.0.0
-            docker push udagram-api-user:1.0.0
-            docker push udagram-frontend:1.0.0
-            docker push udagram-reverseproxy:1.0.0
+            docker push phuclmh/udagram-api-feed:1.0.0
+            docker push phuclmh/udagram-api-user:1.0.0
+            docker push phuclmh/udagram-frontend:1.0.0
+            docker push phuclmh/udagram-reverseproxy:1.0.0
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
