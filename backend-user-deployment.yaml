@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-user
-          image: phuclmh/udagram-api-user:3.0.0
+          image: phuclmh/udagram-api-user:v1
           imagePullPolicy: Always # Required image pull
           # Secrets of Pod is required
           # If secret does not exist the Pod will fail during startup.

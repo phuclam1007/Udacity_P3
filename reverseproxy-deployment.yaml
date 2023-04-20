@@ -15,7 +15,12 @@ spec:
       containers:
         - name: reverseproxy
           imagePullPolicy: Always
-          image: phuclmh/reverseproxy:2.0.0
+          image: phuclmh/reverseproxy:v1
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              cpu: 200m
+            limits:
+              cpu: 500m
       restartPolicy: Always

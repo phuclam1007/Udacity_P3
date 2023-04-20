@@ -30,20 +30,20 @@ jobs:
           command: |
             echo "Inside the Tag Docker image step"
             docker --version # print the version for logging
-            docker tag udagram-api-feed phuclmh/udagram-api-feed:3.0.0
-            docker tag udagram-api-user phuclmh/udagram-api-user:3.0.0
-            docker tag udagram-frontend phuclmh/udagram-frontend:3.0.0
-            docker tag reverseproxy phuclmh/reverseproxy:3.0.0
+            docker tag udagram-api-feed phuclmh/udagram-api-feed:v1
+            docker tag udagram-api-user phuclmh/udagram-api-user:v1
+            docker tag udagram-frontend phuclmh/udagram-frontend:v1
+            docker tag reverseproxy phuclmh/reverseproxy:v1
       - run:
           name: Push Docker image
           command: |
             echo "Inside the Tag Docker image step"
             docker --version # print the version for logging
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            docker push phuclmh/udagram-api-feed:3.0.0
-            docker push phuclmh/udagram-api-user:3.0.0
-            docker push phuclmh/udagram-frontend:3.0.0
-            docker push phuclmh/reverseproxy:3.0.0
+            docker push phuclmh/udagram-api-feed:v1
+            docker push phuclmh/udagram-api-user:v1
+            docker push phuclmh/udagram-frontend:v1
+            docker push phuclmh/reverseproxy:v1
             
 workflows:
 build-docker-workflow:

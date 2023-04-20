@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: phuclmh/udagram-frontend:3.0.0
+          image: phuclmh/udagram-frontend:v1
           imagePullPolicy: Always # Required image pull
           # Secrets of Pod is required
           # If secret does not exist the Pod will fail during startup.
