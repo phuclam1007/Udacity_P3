@@ -29,10 +29,10 @@ spec:
           # To define all of the ConfigMap's data as container environment variables.
           # The key from the ConfigMap becomes the environment variable name in the Pod.
           envFrom:
-            - configMapRef:
-                name: env-configmap
-            - secretRef:
-                name: env-secret
+          - configMapRef:
+              name: env-configmap
+          - secretRef:
+              name: env-secret
       volumes:
       - name: aws-secret
         secret:
